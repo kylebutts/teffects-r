@@ -10,6 +10,12 @@ tests covering the complete set of examples from the excellent(!)
 Really, you should open that manual and read the introduction; it’s
 wonderuflly written!
 
+To install this package, use:
+
+``` r
+devtools::install_github("kylebutts/teffects-r")
+```
+
 ## From Stata to R
 
 This package supports regression adjustment, inverse-probability
@@ -57,7 +63,7 @@ d <- rbinom(n, 1, p)
 y0 <- 1 + 1.5 * x1 - 0.8 * x2 + rnorm(n)
 example_data <- data.frame(y = y0 + 2 * d, d, x1, x2)
 
-setFixest_fml(..x = ~x1 + x2)
+setFixest_fml(..x = ~ x1 + x2)
 
 ## a few examples
 teffects::ra(y ~ treat(d, ref = 0) + ..x, data = example_data)
@@ -82,7 +88,11 @@ teffects::ipw(y ~ treat(d, ref = 0) + ..x, data = example_data)
 #> POmean[0]    0.64094    0.11555  5.5469 2.907e-08 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-teffects::ipw(y ~ treat(d, ref = 0) + ..x, data = example_data, psmethod = "cbps")
+teffects::ipw(
+  y ~ treat(d, ref = 0) + ..x,
+  data = example_data,
+  psmethod = "cbps"
+)
 #> Treatment-effects estimation
 #> Estimator: inverse-probability weighting
 #> Treatment model: cbps 
