@@ -1,0 +1,40 @@
+Package: teffects
+Title: An R Version of the Stata Teffects Suite
+Version: 0.1.0
+Authors@R: 
+    person("Kyle", "Butts", , "buttskyle96@gmail.com", role = c("aut", "cre"))
+Author: Kyle Butts [aut, cre]
+Maintainer: Kyle Butts <buttskyle96@gmail.com>
+Description: Implements treatment-effect estimators with an interface modeled on
+    Stata's 'teffects' suite. Supports regression adjustment, inverse-probability
+    weighting, doubly robust estimators, propensity-score matching, and
+    nearest-neighbor matching, inverse probability tilting, and covariate
+    balancing propensity scores. Also implements inverse-probability weighted
+    regression adjustment, lasso-selected augmented inverse-probability
+    weighting with optional cross-fitting, and marginal quantile treatment
+    effects. Experimental internal implementations cover normalized kappa
+    weighting, covariate balancing, and doubly robust local average treatment
+    effects with a binary instrument. Supports binary and multivalued
+    treatments. Uses standards-compliant sparse formula expansion, direct
+    matrix implementations for estimation and matching.
+License: MIT + file LICENSE
+URL: https://kylebutts.github.io/teffects-r/
+Imports:
+    dreamerr (>= 1.5.0),
+    fixest,
+    FNN,
+    hdm,
+    Matrix
+Suggests:
+    CBPS,
+    haven,
+    knitr,
+    nnet,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/Needs/website: pkgdown
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0

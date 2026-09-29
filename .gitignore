@@ -1,0 +1,7 @@
+.Rproj.user
+.DS_Store
+*.Rcheck/
+teffects.Rcheck/
+teffects_*.tar.gz
+docs/
+pkgdown/

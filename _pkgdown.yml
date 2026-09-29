@@ -1,0 +1,86 @@
+url: https://kylebutts.github.io/teffects-r/
+
+development:
+  mode: auto
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  light-switch: true
+  bslib:
+    primary: "#24536B"
+    secondary: "#D97745"
+    success: "#39745A"
+    border-radius: "0.35rem"
+    btn-border-radius: "0.25rem"
+    code_font: "{ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace}"
+
+home:
+  title: "teffects • Treatment-effect estimators for R"
+  description: >
+    Regression adjustment, weighting, balancing, doubly robust, quantile, and matching estimators with a shared formula interface.
+
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, lightswitch]
+  components:
+    intro:
+      text: Introduction
+      href: articles/introduction.html
+    articles:
+      text: Articles
+      menu:
+        - text: Introduction
+          href: articles/introduction.html
+        - text: Mathematical details
+          href: articles/mathematical-details.html
+        - text: Stata matching details
+          href: articles/stata-nnmatch.html
+
+reference:
+  - title: Regression adjustment
+    desc: Fit ordinary or propensity-weighted outcome regressions and standardize their predictions.
+    contents:
+      - ra
+  - title: Weighting and balancing
+    desc: Model treatment assignment or solve balance equations.
+    contents:
+      - ipw
+  - title: Matching
+    desc: Impute missing potential outcomes from a few opposite-group neighbors.
+    contents:
+      - psmatch
+      - nnmatch
+  - title: Doubly robust estimation
+    desc: Combine treatment and outcome models.
+    contents:
+      - aipw
+      - ipwra
+      - telasso
+  - title: Quantile treatment effects
+    desc: Compare quantiles of marginal potential-outcome distributions.
+    contents:
+      - qte
+  - title: Formula interface
+    contents:
+      - treat
+  - title: Methods
+    contents:
+      - confint.teffects
+
+articles:
+  - title: Overview
+    navbar: ~
+    contents:
+      - introduction
+  - title: Reference
+    contents:
+      - mathematical-details
+      - stata-nnmatch
+
+footer:
+  structure:
+    left: developed_by
+    right: built_with
