@@ -67,6 +67,9 @@
 <div class="page-header"><h1 id="teffects">teffects<a class="anchor" aria-label="anchor" href="#teffects"></a>
 </h1></div>
 <p><strong>teffects</strong> provides treatment-effect estimators with a consistent R formula interface modeled on Stata’s <code>teffects</code> suite. It currently has tests covering the complete set of examples from the excellent(!) <a href="https://www.stata.com/manuals16/te.pdf" class="external-link">Stata’s teffects manual</a>. Really, you should open that manual and read the introduction; it’s wonderuflly written!</p>
+<p>To install this package, use:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kylebutts/teffects-r"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="from-stata-to-r">From Stata to R<a class="anchor" aria-label="anchor" href="#from-stata-to-r"></a>
 </h2>
@@ -105,10 +108,10 @@
 </table>
 <p>In R, <code>...</code> will be the shared outcome/treatment formula (following fixest formula symantics) and the <code>data</code> argument. You can use <code>treatment_fml</code> when the propensity-score model needs a different covariate specification from the outcome model. For balance-first weighting, use <code>ipw(..., psmethod = "ipt")</code> or <code>ipw(..., psmethod = "cbps")</code>; the same propensity-score methods are available in <code><a href="reference/aipw.html">aipw()</a></code> and <code><a href="reference/ipwra.html">ipwra()</a></code>.</p>
 <p>Use <code><a href="reference/treat.html">treat()</a></code> inside the formula to identify treatment and its reference level:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="reference/treat.html">treat</a></span><span class="op">(</span><span class="va">d</span>, ref <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span></span></code></pre></div>
 <p>The outcome appears on the left, while the remaining right-hand-side terms are pre-treatment adjustment covariates that we will condition on.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kylebutts.github.io/teffects-r/">teffects</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lrberge.github.io/fixest/" class="external-link">fixest</a></span><span class="op">)</span></span>
 <span></span>
@@ -121,7 +124,7 @@
 <span><span class="va">y0</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> <span class="va">x1</span> <span class="op">-</span> <span class="fl">0.8</span> <span class="op">*</span> <span class="va">x2</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y0</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">d</span>, <span class="va">d</span>, <span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://lrberge.github.io/fixest/reference/setFixest_fml.html" class="external-link">setFixest_fml</a></span><span class="op">(</span>..x <span class="op">=</span> <span class="op">~</span><span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://lrberge.github.io/fixest/reference/setFixest_fml.html" class="external-link">setFixest_fml</a></span><span class="op">(</span>..x <span class="op">=</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## a few examples</span></span>
 <span><span class="fu">teffects</span><span class="fu">::</span><span class="fu"><a href="reference/ra.html">ra</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="reference/treat.html">treat</a></span><span class="op">(</span><span class="va">d</span>, ref <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="va">..x</span>, data <span class="op">=</span> <span class="va">example_data</span><span class="op">)</span></span>
@@ -146,7 +149,11 @@
 <span><span class="co">#&gt; POmean[0]    0.64094    0.11555  5.5469 2.907e-08 ***</span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="fu">teffects</span><span class="fu">::</span><span class="fu"><a href="reference/ipw.html">ipw</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="reference/treat.html">treat</a></span><span class="op">(</span><span class="va">d</span>, ref <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="va">..x</span>, data <span class="op">=</span> <span class="va">example_data</span>, psmethod <span class="op">=</span> <span class="st">"cbps"</span><span class="op">)</span></span>
+<span><span class="fu">teffects</span><span class="fu">::</span><span class="fu"><a href="reference/ipw.html">ipw</a></span><span class="op">(</span></span>
+<span>  <span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="reference/treat.html">treat</a></span><span class="op">(</span><span class="va">d</span>, ref <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="va">..x</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">example_data</span>,</span>
+<span>  psmethod <span class="op">=</span> <span class="st">"cbps"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Treatment-effects estimation</span></span>
 <span><span class="co">#&gt; Estimator: inverse-probability weighting</span></span>
 <span><span class="co">#&gt; Treatment model: cbps </span></span>
