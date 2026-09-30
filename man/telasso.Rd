@@ -43,7 +43,8 @@ multivalued treatment requires \code{"logit"}.}
 
 \item{stat}{Target statistic. Smooth estimators support \code{"ate"}, \code{"att"},
 \code{"atc"}, and/or \code{"pomeans"}; matching estimators support \code{"ate"}, \code{"att"},
-and \code{"atc"}.}
+and \code{"atc"}. Values are matched case-insensitively, so \code{"ATE"}, \code{"ATT"},
+and \code{"ATC"} are accepted as well.}
 
 \item{selection}{Penalty-selection method. The rigorous plugin method is
 currently implemented.}

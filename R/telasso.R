@@ -41,6 +41,7 @@ telasso <- function(
   dreamerr::check_arg(fml, "ts formula mbt")
   dreamerr::check_arg(data, "data.frame mbt")
   dreamerr::check_arg(treatment_fml, "NULL os formula")
+  stat <- tolower(stat)
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_arg(
     outcome_ainclude,

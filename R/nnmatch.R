@@ -36,6 +36,7 @@ nnmatch <- function(
 ) {
   dreamerr::check_arg(data, "data.frame mbt")
   dreamerr::check_arg(fml, "ts formula mbt")
+  stat <- tolower(stat)
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(vce, "strict match")
   dreamerr::check_set_arg(metric, "strict match")

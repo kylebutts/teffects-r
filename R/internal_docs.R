@@ -25,7 +25,8 @@
 #'   tilting; and `"cbps"` uses covariate-balancing propensity scores.
 #' @param stat Target statistic. Smooth estimators support `"ate"`, `"att"`,
 #'   `"atc"`, and/or `"pomeans"`; matching estimators support `"ate"`, `"att"`,
-#'   and `"atc"`.
+#'   and `"atc"`. Values are matched case-insensitively, so `"ATE"`, `"ATT"`,
+#'   and `"ATC"` are accepted as well.
 #' @param cme Conditional-mean estimation method for AIPW. Only maximum
 #'   likelihood (`"ml"`) is currently implemented.
 #' @param weights Optional nonnegative observation weights. Supply a numeric

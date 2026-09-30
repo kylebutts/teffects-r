@@ -30,7 +30,8 @@ tilting; and \code{"cbps"} uses covariate-balancing propensity scores.}
 
 \item{stat}{Target statistic. Smooth estimators support \code{"ate"}, \code{"att"},
 \code{"atc"}, and/or \code{"pomeans"}; matching estimators support \code{"ate"}, \code{"att"},
-and \code{"atc"}.}
+and \code{"atc"}. Values are matched case-insensitively, so \code{"ATE"}, \code{"ATT"},
+and \code{"ATC"} are accepted as well.}
 
 \item{weights}{Optional nonnegative observation weights. Supply a numeric
 vector with one value per row of \code{data}, or the name of a column in \code{data}.}

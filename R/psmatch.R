@@ -42,6 +42,7 @@ psmatch <- function(
     .arg_name = "psmethod",
     .message = "not implemented yet: use psmethod = \"logit\" or \"probit\"."
   )
+  stat <- tolower(stat)
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(vce, "strict match")
   dreamerr::check_set_arg(psaction, "strict match")

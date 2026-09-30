@@ -32,7 +32,8 @@ covariates.}
 
 \item{stat}{Target statistic. Smooth estimators support \code{"ate"}, \code{"att"},
 \code{"atc"}, and/or \code{"pomeans"}; matching estimators support \code{"ate"}, \code{"att"},
-and \code{"atc"}.}
+and \code{"atc"}. Values are matched case-insensitively, so \code{"ATE"}, \code{"ATT"},
+and \code{"ATC"} are accepted as well.}
 
 \item{nneighbor}{Number of opposite-treatment nearest neighbors used to
 impute a missing potential outcome. It is the matching estimator's

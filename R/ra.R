@@ -25,6 +25,7 @@ ra <- function(
   dreamerr::check_arg(fml, "ts formula mbt")
   dreamerr::check_arg(data, "data.frame mbt")
   dreamerr::check_set_arg(omodel, "strict match")
+  stat <- tolower(stat)
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(vce, "strict match")
   dreamerr::check_set_value(
@@ -237,6 +238,7 @@ ipwra <- function(
   )
   dreamerr::check_set_arg(omodel, "strict match")
   dreamerr::check_set_arg(psmethod, "strict match")
+  stat <- tolower(stat)
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(vce, "strict match")
   dreamerr::check_set_value(

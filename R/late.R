@@ -59,6 +59,7 @@ late <- function(
   dreamerr::check_arg(data, "data.frame mbt")
   dreamerr::check_arg(instrument_fml, "NULL os formula")
   dreamerr::check_arg(instrument_ref, "NULL scalar")
+  stat <- tolower(stat)
   dreamerr::check_set_arg(estimator, "strict match")
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(imodel, "strict match")

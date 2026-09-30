@@ -40,6 +40,7 @@ ipw <- function(
     "numeric scalar GE{0} LT{0.5}",
     .arg_name = "pstolerance",
   )
+  stat <- tolower(stat)
   dreamerr::check_set_arg(psmethod, "strict match")
   dreamerr::check_set_arg(stat, "strict match")
   dreamerr::check_set_arg(psaction, "strict match")
