@@ -54,7 +54,8 @@ ipwra(
 
   Target statistic. Smooth estimators support `"ate"`, `"att"`, `"atc"`,
   and/or `"pomeans"`; matching estimators support `"ate"`, `"att"`, and
-  `"atc"`.
+  `"atc"`. Values are matched case-insensitively, so `"ATE"`, `"ATT"`,
+  and `"ATC"` are accepted as well.
 
 - weights:
 
