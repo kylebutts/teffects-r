@@ -160,6 +160,70 @@ test_that("nnmatch validates distance controls", {
   )
 })
 
+test_that("nnmatch preserves expanded covariate names", {
+  data <- data.frame(
+    y = seq_len(8),
+    d = rep(0:1, 4L),
+    x1 = 1:8,
+    x2 = 8:1
+  )
+  fixest::setFixest_fml(..x = ~ x1 + x2)
+
+  prepared <- teffects:::.teffects_prepare(
+    fixest::xpd(y ~ treat(d) + ..x),
+    data,
+    outcome_design = "full",
+    treatment_design = "none"
+  )
+
+  expect_identical(
+    colnames(prepared$outcome_design),
+    c("(Intercept)", "x1", "x2")
+  )
+})
+
+test_that("nnmatch follows fixest naming for logical covariates", {
+  data <- data.frame(
+    y = seq_len(8),
+    d = rep(0:1, 4L),
+    unemployed = rep(c(FALSE, TRUE), 4L),
+    nodegree = rep(c(TRUE, FALSE), 4L)
+  )
+
+  prepared <- teffects:::.teffects_prepare(
+    y ~ treat(d) + unemployed + nodegree,
+    data,
+    outcome_design = "full",
+    treatment_design = "none"
+  )
+
+  expect_identical(
+    colnames(prepared$outcome_design),
+    c("(Intercept)", "unemployedTRUE", "nodegreeTRUE")
+  )
+  expect_equal(
+    as.vector(prepared$outcome_design),
+    as.vector(stats::model.matrix(~ unemployed + nodegree, data))
+  )
+})
+
+test_that("nnmatch handles singular Mahalanobis covariance matrices", {
+  data <- data.frame(
+    y = seq_len(12),
+    d = rep(0:1, 6L),
+    group = factor(rep(letters[1:3], 4L)),
+    x = 1:12
+  )
+
+  expect_silent(
+    fit <- nnmatch(
+      y ~ treat(d) + fixest::i(group) + x,
+      data = data
+    )
+  )
+  expect_true(is.finite(unname(coef(fit))))
+})
+
 test_that("k-d tree neighbor search preserves exhaustive matching", {
   skip_if_not_installed("FNN")
   set.seed(771)

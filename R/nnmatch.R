@@ -102,7 +102,15 @@ nnmatch <- function(
 
   treatment <- as.integer(prepared$treatment != control)
   design <- as.matrix(prepared$outcome_design)
-  design <- design[, colnames(design) != "(Intercept)", drop = FALSE]
+  intercept <- match("(Intercept)", colnames(design))
+  if (!is.na(intercept)) {
+    candidate_design <- design[, -intercept, drop = FALSE]
+    rank_design <- cbind(1, candidate_design)
+    decomposition <- qr(rank_design)
+    keep <- decomposition$pivot[seq_len(decomposition$rank)]
+    keep <- keep[keep != 1L] - 1L
+    design <- candidate_design[, sort(keep), drop = FALSE]
+  }
   if (!ncol(design)) {
     scaling <- matrix(numeric(), 0L, 0L)
   } else {
